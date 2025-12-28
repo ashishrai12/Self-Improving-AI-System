@@ -64,6 +64,9 @@ Iteration 8: Accuracy 0.88
 Iteration 9: Accuracy 0.88
 
 
+<img width="986" height="617" alt="{A704AE9D-A6DA-4981-8118-6774F7CC72C0}" src="https://github.com/user-attachments/assets/8ff17e71-3068-4c81-a10d-488da9fcaa4c" />
+
+
 ## How to Run the Project End-to-End
 
 1. Ensure Python 3.8+ and required packages: `pip install scikit-learn pyyaml pandas numpy`
