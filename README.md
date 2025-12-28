@@ -36,6 +36,34 @@ This project implements a self-improving AI system that learns from its own mist
 
 Improvement is measured by tracking accuracy and other metrics across iterations. Logs are stored in `experiments/training.log`. Regression tests ensure system stability.
 
+sample output:
+Iteration 0: Accuracy 0.88
+Iteration 1: Accuracy 0.89
+Iteration 2: Accuracy 0.88
+Iteration 3: Accuracy 0.88
+Iteration 4: Accuracy 0.88
+Iteration 0: Accuracy 0.88
+Iteration 1: Accuracy 0.89
+Iteration 2: Accuracy 0.88
+Iteration 3: Accuracy 0.88
+Iteration 4: Accuracy 0.88
+Iteration 0: Accuracy 0.88
+Iteration 1: Accuracy 0.89
+Iteration 2: Accuracy 0.88
+Iteration 3: Accuracy 0.88
+Iteration 4: Accuracy 0.88
+Iteration 0: Accuracy 0.88
+Iteration 1: Accuracy 0.89
+Iteration 2: Accuracy 0.88
+Iteration 3: Accuracy 0.88
+Iteration 4: Accuracy 0.88
+Iteration 5: Accuracy 0.88
+Iteration 6: Accuracy 0.88
+Iteration 7: Accuracy 0.88
+Iteration 8: Accuracy 0.88
+Iteration 9: Accuracy 0.88
+
+
 ## How to Run the Project End-to-End
 
 1. Ensure Python 3.8+ and required packages: `pip install scikit-learn pyyaml pandas numpy`
