@@ -29,6 +29,9 @@ This project implements a self-improving AI system that learns from its own mist
 4. When sufficient feedback is collected, the retrainer combines original training data with feedback and retrains the model.
 5. The process repeats, allowing the model to improve iteratively.
 
+<img width="842" height="491" alt="{C60CD542-9B8B-4B80-9F3E-E607CDED5810}" src="https://github.com/user-attachments/assets/8d4963ef-491b-4cfc-9bdf-ae010533f922" />
+
+
 ## Measuring Improvement
 
 Improvement is measured by tracking accuracy and other metrics across iterations. Logs are stored in `experiments/training.log`. Regression tests ensure system stability.
