@@ -29,7 +29,27 @@ This project implements a self-improving AI system that learns from its own mist
 4. When sufficient feedback is collected, the retrainer combines original training data with feedback and retrains the model.
 5. The process repeats, allowing the model to improve iteratively.
 
-<img width="842" height="491" alt="{C60CD542-9B8B-4B80-9F3E-E607CDED5810}" src="https://github.com/user-attachments/assets/8d4963ef-491b-4cfc-9bdf-ae010533f922" />
+Feature Correlation Heatmap (feature_correlation.png)
+Purpose: Visualizes the pairwise correlations between all 20 input features in the dataset, helping identify relationships that could impact model performance.
+
+Key Features:
+
+Heatmap Format: Uses a color gradient from blue (negative correlation) to red (positive correlation)
+20x20 Grid: Shows correlation coefficients for each feature pair
+Diagonal: Always 1.0 (perfect self-correlation)
+Interpretation:
+Values near 1.0 indicate strong positive correlation
+Values near -1.0 indicate strong negative correlation
+Values near 0.0 indicate no linear relationship
+Insights for ML Engineering:
+
+Identifies redundant features (high correlation > 0.8)
+Helps with feature selection to reduce dimensionality
+Reveals potential multicollinearity issues
+In this synthetic dataset, correlations are mostly low (< 0.2), indicating independent features
+This chart demonstrates advanced data exploration skills, crucial for production ML systems. Combined with the performance plot, it shows comprehensive analysis capabilities that would impress in a senior ML engineering role. The system now produces two professional visualizations: one for model improvement tracking, and one for data understanding.
+
+<img width="1075" height="901" alt="{CB56323F-E798-4547-A316-36B62A94BF23}" src="https://github.com/user-attachments/assets/c1e0fb0e-5f04-4bb7-8e68-c635b6d81d2e" />
 
 
 ## Measuring Improvement
