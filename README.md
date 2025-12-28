@@ -1,2 +1,44 @@
-# Self-Improving-AI-System
-This project implements a self-improving AI system that learns from its own mistakes through an automated feedback loop. The system consists of a base prediction model, a critic that evaluates output quality, and a retraining mechanism that incorporates feedback to improve performance over time.
+# Self-Improving AI System
+
+## Problem Statement
+
+This project implements a self-improving AI system that learns from its own mistakes through an automated feedback loop. The system consists of a base prediction model, a critic that evaluates output quality, and a retraining mechanism that incorporates feedback to improve performance over time. The goal is to demonstrate continuous learning in a controlled, local environment without external dependencies.
+
+## Architecture
+
+```
++----------------+     +----------------+     +----------------+
+|  Base Model    | --> |   Critic       | --> |  Feedback      |
+| (Prediction)   |     | (Evaluation)   |     |  Loop          |
++----------------+     +----------------+     +----------------+
+       ^                        |                        |
+       |                        v                        v
+       +------------------- Retrainer -------------------+
+```
+
+- **Base Model**: A simple logistic regression model for binary classification.
+- **Critic**: Evaluates prediction confidence; flags low-confidence predictions as failures.
+- **Feedback Loop**: Collects failed predictions, retrains the base model with combined data.
+- **Retrainer**: Handles model retraining with original + feedback data.
+
+## How the Feedback Loop Works
+
+1. The base model makes predictions on test data.
+2. The critic evaluates each prediction's quality based on confidence scores.
+3. Failed predictions (low quality or incorrect) are stored in the feedback dataset.
+4. When sufficient feedback is collected, the retrainer combines original training data with feedback and retrains the model.
+5. The process repeats, allowing the model to improve iteratively.
+
+## Measuring Improvement
+
+Improvement is measured by tracking accuracy and other metrics across iterations. Logs are stored in `experiments/training.log`. Regression tests ensure system stability.
+
+## How to Run the Project End-to-End
+
+1. Ensure Python 3.8+ and required packages: `pip install scikit-learn pyyaml pandas numpy`
+2. Run initial training: `python pipeline/train.py`
+3. Run inference test: `python pipeline/infer.py`
+4. Run feedback loop simulation: `python pipeline/feedback_loop.py`
+5. Run tests: `python evaluation/regression_tests.py`
+
+The system generates synthetic data for demonstration. For real data, place CSV files in `data/raw/` and modify `base_model.py` accordingly.
