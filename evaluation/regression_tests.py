@@ -19,7 +19,7 @@ def test_base_model():
 def test_critic():
     config_path = 'config/config.yaml'
     critic = CriticModel(config_path)
-    proba = np.array([[0.7, 0.3], [0.4, 0.6]])
+    proba = np.array([[0.7, 0.3], [0.55, 0.45]])
     quality = critic.evaluate(proba)
     assert quality[0] == True
     assert quality[1] == False
