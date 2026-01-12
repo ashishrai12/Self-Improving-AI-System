@@ -2,7 +2,7 @@
 
 ## Problem Statement
 
-This project implements a self-improving AI system that learns from its own mistakes through an automated feedback loop. The system consists of a base prediction model, a critic that evaluates output quality, and a retraining mechanism that incorporates feedback to improve performance over time. The goal is to demonstrate continuous learning in a controlled, local environment without external dependencies.
+This project implements a self-improving AI system that learns from its own mistakes through an automated feedback loop. The system consists of a base prediction model, a critic that evaluates output quality, and a retraining mechanism that incorporates feedback to improve performance over time. The goal is to demonstrate continuouas learning in a controlled, local environment without external dependencies.
 
 ## Architecture
 
