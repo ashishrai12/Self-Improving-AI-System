@@ -17,9 +17,18 @@ This project implements a self-improving AI system that learns from its own mist
 ```
 
 - **Base Model**: A simple logistic regression model for binary classification.
-- **Critic**: Evaluates prediction confidence; flags low-confidence predictions as failures.
-- **Feedback Loop**: Collects failed predictions, retrains the base model with combined data.
-- **Retrainer**: Handles model retraining with original + feedback data.
+- **Critic**: Evaluates prediction confidence using Shannon entropy metrics.
+- **Feedback Loop**: Collects failed predictions and triggers retraining.
+- **Retrainer**: Re-optimizes the empirical risk using the augmented dataset.
+
+## Polyglot Architecture
+
+To ensure both technical rigor and computational performance, the system utilizes a multi-language stack:
+
+- **Python**: Orchestrates the primary ML pipeline, training, and evaluation.
+- **Rust (`src_rust/`)**: Provides high-performance implementations of information-theoretic metrics.
+- **Julia (`simulations_julia/`)**: Used for formal theoretical simulations of Lyapunov stability and posterior concentration.
+- **Shell**: Orchestrates the cross-language execution flow.
 
 ## Mathematical Foundation
 
