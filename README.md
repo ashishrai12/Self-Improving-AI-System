@@ -6,20 +6,33 @@ This project implements a self-improving AI system that learns from its own mist
 
 ## Architecture
 
-```
-+----------------+     +----------------+     +----------------+
-|  Base Model    | --> |   Critic       | --> |  Feedback      |
-| (Prediction)   |     | (Evaluation)   |     |  Loop          |
-+----------------+     +----------------+     +----------------+
-       ^                        |                        |
-       |                        v                        v
-       +------------------- Retrainer -------------------+
+```mermaid
+graph LR
+    BM(Base Model<br/>Prediction) -->|Predictions| C{Critic<br/>Evaluation}
+    C -->|High Quality| Accept[Accepted Predictions]
+    C -->|Low Confidence| FL[Feedback Loop]
+    FL -->|Collect Uncertain Samples| R(Retrainer)
+    R -->|Update Model Weights| BM
+    
+    style BM fill:#e1f5fe,stroke:#0288d1,stroke-width:2px
+    style C fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    style FL fill:#ffebee,stroke:#d32f2f,stroke-width:2px
+    style R fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
 ```
 
 - **Base Model**: A simple logistic regression model for binary classification.
-- **Critic**: Evaluates prediction confidence; flags low-confidence predictions as failures.
-- **Feedback Loop**: Collects failed predictions, retrains the base model with combined data.
-- **Retrainer**: Handles model retraining with original + feedback data.
+- **Critic**: Evaluates prediction confidence using Shannon entropy metrics.
+- **Feedback Loop**: Collects failed predictions and triggers retraining.
+- **Retrainer**: Re-optimizes the empirical risk using the augmented dataset.
+
+## Polyglot Architecture
+
+To ensure both technical rigor and computational performance, the system utilizes a multi-language stack:
+
+- **Python**: Orchestrates the primary ML pipeline, training, and evaluation.
+- **Rust (`src_rust/`)**: Provides high-performance implementations of information-theoretic metrics.
+- **Julia (`simulations_julia/`)**: Used for formal theoretical simulations of Lyapunov stability and posterior concentration.
+- **Shell**: Orchestrates the cross-language execution flow.
 
 ## Mathematical Foundation
 
@@ -90,34 +103,22 @@ This chart demonstrates advanced data exploration skills, crucial for production
 Improvement is measured by tracking accuracy and other metrics across iterations. Logs are stored in `experiments/training.log`. Regression tests ensure system stability.
 
 sample output:
-Iteration 0: Accuracy 0.88
-Iteration 1: Accuracy 0.89
-Iteration 2: Accuracy 0.88
-Iteration 3: Accuracy 0.88
-Iteration 4: Accuracy 0.88
-Iteration 0: Accuracy 0.88
-Iteration 1: Accuracy 0.89
-Iteration 2: Accuracy 0.88
-Iteration 3: Accuracy 0.88
-Iteration 4: Accuracy 0.88
-Iteration 0: Accuracy 0.88
-Iteration 1: Accuracy 0.89
-Iteration 2: Accuracy 0.88
-Iteration 3: Accuracy 0.88
-Iteration 4: Accuracy 0.88
-Iteration 0: Accuracy 0.88
-Iteration 1: Accuracy 0.89
-Iteration 2: Accuracy 0.88
-Iteration 3: Accuracy 0.88
-Iteration 4: Accuracy 0.88
-Iteration 5: Accuracy 0.88
-Iteration 6: Accuracy 0.88
-Iteration 7: Accuracy 0.88
-Iteration 8: Accuracy 0.88
-Iteration 9: Accuracy 0.88
+```text
+Iteration 0: Accuracy 0.775, Feedback collected: 50
+Iteration 1: Accuracy 0.795, Feedback collected: 50
+Iteration 2: Accuracy 0.815, Feedback collected: 50
+Iteration 3: Accuracy 0.820, Feedback collected: 50
+Iteration 4: Accuracy 0.820, Feedback collected: 50
+Iteration 5: Accuracy 0.840, Feedback collected: 50
+Iteration 6: Accuracy 0.835, Feedback collected: 50
+Iteration 7: Accuracy 0.865, Feedback collected: 20
+Iteration 8: Accuracy 0.870, Feedback collected: 1
+Iteration 9: Accuracy 0.870, Feedback collected: 0
+No more low-quality predictions in the pool. Convergence reached.
+Visual simulation plot saved to experiments\accuracy_plot.png
+```
 
-
-<img width="986" height="617" alt="{A704AE9D-A6DA-4981-8118-6774F7CC72C0}" src="https://github.com/user-attachments/assets/8ff17e71-3068-4c81-a10d-488da9fcaa4c" />
+![Model Improvement Chart](experiments/accuracy_plot.png)
 
 
 ## How to Run the Project End-to-End
