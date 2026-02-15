@@ -27,17 +27,29 @@ The system implements iterative optimization of the **Empirical Risk** $\mathcal
 
 ### 1. Recursive Risk Minimization
 At each iteration $t$, the model parameters $\theta_t$ are updated by incorporating newly collected failure samples $\mathcal{D}_{f,t}$ into the existing dataset $\mathcal{D}_t$:
-$$ \theta_{t+1} = \arg\min_{\theta \in \Theta} \frac{1}{|\mathcal{D}_t \cup \mathcal{D}_{f,t}|} \sum_{(x,y) \in \mathcal{D}_t \cup \mathcal{D}_{f,t}} \mathcal{L}(h_\theta(x), y) $$
+
+$$
+\theta_{t+1} = \arg\min_{\theta \in \Theta} \frac{1}{|\mathcal{D}_t \cup \mathcal{D}_{f,t}|} \sum_{(x,y) \in \mathcal{D}_t \cup \mathcal{D}_{f,t}} \mathcal{L}(h_\theta(x), y)
+$$
+
 where $\mathcal{L}$ is the binary cross-entropy loss function.
 
 ### 2. Information-Theoretic Uncertainty Sampling
 The Critic identifies the failure set $\mathcal{F}$ by evaluating the **Predictive Entropy** $H(Y|x, \theta)$, which serves as a measure of the model's uncertainty:
-$$ H(Y|x, \theta) = -\sum_{y \in \{0,1\}} P(y|x; \theta) \log P(y|x; \theta) $$
+
+$$
+H(Y|x, \theta) = -\sum_{y \in \{0,1\}} P(y|x; \theta) \log P(y|x; \theta)
+$$
+
 Samples with $H(Y|x, \theta) > \tau$ are prioritized for the feedback loop, effectively performing **Active Learning** to reduce the version space of the hypothesis class $\mathcal{H}$.
 
 ### 3. Bayesian Posterior Concentration
 The self-improvement process is a practical instantiation of **Recursive Bayesian Estimation**. Given a prior $p(\theta | \mathcal{D}_t)$, the update follows:
-$$ p(\theta | \mathcal{D}_{t+1}) \propto p(\theta | \mathcal{D}_t) \cdot p(\mathcal{D}_{f,t} | \theta) $$
+
+$$
+p(\theta | \mathcal{D}_{t+1}) \propto p(\theta | \mathcal{D}_t) \cdot p(\mathcal{D}_{f,t} | \theta)
+$$
+
 As $t \to \infty$, the posterior distribution $p(\theta | \mathcal{D}_t)$ concentrates toward the optimal parameter $\theta^*$, minimizing the Kullback-Leibler (KL) divergence from the true data distribution $P_{true}$.
 
 For a full formal derivation including Rademacher complexity bounds and Lyapunov stability analysis, see the [Mathematical Foundation Document](docs/mathematical_foundation.md).
